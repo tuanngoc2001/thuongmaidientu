@@ -1,4 +1,4 @@
-package com.example.airbnb.security;
+package com.example.thuongmaidientu.security;
 
 
 import com.example.thuongmaidientu.security.jwt.CustomAccessDeniedHandler;
@@ -73,9 +73,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
-                .antMatchers("/login", "/register", "/hello").permitAll()
-                .antMatchers("/users/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/login", "/register").permitAll()
+//                .antMatchers("/users/**").access("hasRole('ROLE_USER')")
+//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 //                .antMatchers(HttpMethod.GET
 //                        ).access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 //                .antMatchers(HttpMethod.DELETE, "/categories",
