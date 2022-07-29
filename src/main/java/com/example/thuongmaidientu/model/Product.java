@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private float price;
     private String name;
     private String image;
@@ -18,7 +18,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, float price, String name, String image, int number, float sale) {
+    public Product(Long id, float price, String name, String image, int number, float sale) {
         this.id = id;
         this.price = price;
         this.name = name;
@@ -27,11 +27,11 @@ public class Product {
         this.sale = sale;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

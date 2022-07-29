@@ -1,6 +1,6 @@
 package com.example.thuongmaidientu.model;
 
-import lombok.Data;
+
 
 import javax.persistence.*;
 
