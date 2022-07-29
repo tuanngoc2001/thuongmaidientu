@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./signin.css" />
+    <link rel="stylesheet" href="./register.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -23,11 +23,10 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-    <title>Login</title>
+    <title>Register</title>
     <style>
       a {
         /*text-decoration: none;*/
-
         font-size: 2rem;
         margin-left: 9rem;
         font-weight: bold;
@@ -42,73 +41,6 @@
   </head>
   <body>
     <div class="signin" id="signin">
-      <div class="signin__content">
-        <h1 class="signin__heading">Sign in</h1>
-        <h4 class="signin__caption">
-          <hr
-            style="
-              display: inline-block;
-              transform: translateY(200%);
-              margin-right: 1rem;
-              border-radius: 2px;
-            "
-            width="20%"
-            size="2px"
-            color="red"
-          />
-          Sign up with
-        </h4>
-        <div class="signin-social">
-          <div class="signin-social__item">
-            <i class="fa-brands fa-google sigin-social__icon"></i>
-            <span class="signin-social__text">Sign in with Google</span>
-          </div>
-          <div class="signin-social__item">
-            <i class="fa-brands fa-facebook sigin-social__icon"></i>
-            <span class="signin-social__text">Sign in with Facebook</span>
-          </div>
-        </div>
-        <form class="signin-form">
-          <div class="signin-form__group">
-            <input
-              type="text"
-              class="signin-form__input"
-              id="user"
-              placeholder="username"
-            />
-            <input
-              type="text"
-              class="signin-form__input"
-              id="pass"
-              placeholder="password"
-            />
-            <div class="checkbox">
-              <input
-                type="checkbox"
-                class="checkbox__input"
-                id="checkbox__input"
-              />
-              <label for="checkbox__input" class="checkbox__label" style="font-size: 2rem">Save Password</label><br />
-            </div>
-          </div>
-        </form>
-        <input type="submit" class="signin__submit" onclick="checklogin()" value="Sign in">
-        <a href="#" onclick="UIRegister()">Register</a>
-        <div class="checkbox2">
-            <input type="checkbox" class="checkbox2__input" id="checkbox2__input">
-            <label for="checkbox2__input" class="checkbox2__lable" onclick="myFunction()">
-              <div class="checkbox2__spin"></div>
-            </label>
-          </div>
-      </div>
-      <div class="signin__image">
-        <img src="image/phihanhgia.png" alt="" />
-      </div>
-    </div>
-      <script>
-        function UIRegister()
-        {
-          let str=`<div class="signin" id="signin">
       <div class="signin__content">
         <h1 class="signin__heading">Sign in</h1>
         <h4 class="signin__caption">
@@ -165,7 +97,7 @@
             </div>
           </div>
         </form>
-        <input type="submit" class="signin__submit" onclick="checkRegister()" value="Register">
+        <input type="submit" class="signin__submit" onclick="checklogin()" value="Register">
         <a href="#" onclick="UILogin()">Login</a>
         <div class="checkbox2">
             <input type="checkbox" class="checkbox2__input" id="checkbox2__input">
@@ -177,11 +109,8 @@
       <div class="signin__image">
         <img src="image/phihanhgia.png" alt="" />
       </div>
-    </div>`
-          document.body.innerHTML=str;
-
-
-        }
+    </div>
+      <script>
         function UILogin()
         {
           document.body.innerHTML=`<div class="signin" id="signin">
@@ -249,44 +178,6 @@
       </div>
     </div>`
         }
-        function checkRegister(){
-          let user=document.getElementById('user').value;
-          let pass=document.getElementById('pass').value;
-          let repPass=document.getElementById('re-pass').value;
-          let save=document.getElementsByClassName('checkbox__input');
-          console.log(pass)
-          console.log(repPass)
-          if(repPass==pass)
-          {
-            let obj={
-              username:user,
-              password:pass,
-              confirmPassword:repPass
-            }
-            Register(obj);
-          }
-          else
-          console.log("mật khẩu khác nhau");
-
-        }
-        function Register(obj)
-        {
-          $.ajax({
-            headers:{
-              'Accept':'application/json',
-              'Content-Type':'application/json',
-            },
-            type:'POST',
-            url:'http://localhost:8000/register',
-            data:JSON.stringify(obj),
-            success:function (data)
-            {
-              console.log(data);
-              // loadUser();
-            },
-
-          });
-        }
         function myFunction() {
            var element = document.getElementById('signin');
            element.classList.toggle("dark-mode");
@@ -296,7 +187,6 @@
           let user=document.getElementById('user').value;
           let pass=document.getElementById('pass').value;
           let save=document.getElementsByClassName('checkbox__input');
-
 
           let obj={
             username:user,
@@ -313,11 +203,6 @@
             success:function (data)
             {
               localStorage.setItem("TOKEN",data.accessToken);
-              if(save[0].checked==true)
-              {
-
-                localStorage.setItem("user", JSON.stringify(obj));
-              }
               console.log(data.accessToken);
               // loadUser();
             },
