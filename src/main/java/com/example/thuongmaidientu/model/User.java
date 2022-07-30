@@ -1,15 +1,12 @@
 package com.example.thuongmaidientu.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String username;
     private String password;
     private String confirmPassword;
@@ -17,8 +14,18 @@ public class User {
 
     public User() {
     }
+    @ManyToOne
+    private Role role;
 
-    public User(int id, String username, String password, String confirmPassword, int status) {
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public User(Long id, String username, String password, String confirmPassword, int status) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -26,11 +33,11 @@ public class User {
         this.status = status;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
