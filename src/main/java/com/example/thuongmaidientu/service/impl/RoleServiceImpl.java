@@ -26,5 +26,10 @@ roleRepository.save(role);
         return roleRepository.findByName(name);
     }
 
+    @Override
+    public Iterable<String> findNameRole() {
+        return roleRepository.findNameRole();
+    }
+
 
 }

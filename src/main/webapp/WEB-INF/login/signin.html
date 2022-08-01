@@ -24,6 +24,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
     <title>Login</title>
+    <link rel="stylesheet" href="../admin/admin.css">
     <style>
       a {
         /*text-decoration: none;*/
@@ -312,17 +313,104 @@
             data:JSON.stringify(obj),
             success:function (data)
             {
-              localStorage.setItem("TOKEN",data.accessToken);
-              if(save[0].checked==true)
-              {
 
-                localStorage.setItem("user", JSON.stringify(obj));
-              }
+              localStorage.setItem("TOKEN",data.accessToken);
+              // if(save[0].checked==true)
+              // {
+                localStorage.setItem("USERID",data.id);
+              // }
               console.log(data.accessToken);
-              // loadUser();
+              checkUi(data);
+
             },
 
           });
+        }
+        //nêu user thì vào template chính còn k thì vào giao diện admin
+
+        function checkUi(data)
+        {
+
+          if(data.roles[0].authority=="ROLE_ADMIN")
+          {
+            document.body.innerHTML=`<div class="admin">
+        <div class="admin__infor">
+            <h2 class="admin__title">Admin</h2>
+            <div class="admin__search">
+                <input placeholder="search ..." type="text" class="admin__search-input">
+                <i class="fa-solid fa-magnifying-glass admin__search-icon" ></i>
+            </div>
+        </div>
+        <div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>username</th>
+
+                        <th>roles</th>
+                        <th>status</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr>
+                        <td>${data.id}</td>
+                        <td>${data.username}</td>
+
+                        <td>
+                            <select id="select">
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="status" id="status">
+                             <p class="status__active">Active</p>
+<!--                                <p class="status__unable">Unable</p>-->
+                            </div>
+                        </td>
+                        <td>
+                            <div class="admin-table__action">
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-wrench"></i>
+                            <a style="margin: 0" href="" onclick="deleteUser(${data.id})"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>`
+
+
+
+
+            // document.getElementById('tbody').innerHTML=str;
+            $.ajax({
+              headers:{
+                Authorization:'Bearer '+localStorage.getItem("TOKEN")
+              },
+              type:'GET',
+              url:'http://localhost:8000/api/v1/roles/name',
+              success:function (data)
+              {
+                let tmp=``;
+                for(var i=0;i<data.length;i++)
+                {
+                  tmp+=`<option value="${data[i]}">${data[i]}</option>`
+                }
+                document.getElementById('select').innerHTML=tmp;
+              },
+
+            });
+
+          }
+        }
+        function deleteUser(id)
+        {
+
         }
         </script>
   </body>

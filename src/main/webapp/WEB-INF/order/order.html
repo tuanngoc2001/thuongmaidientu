@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="order.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>date</th>
+            <th>name</th>
+            <th>status</th>
+            <th>total</th>
+            <th>username</th>
+            <th>action</th>
+            <th>details</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </div>
+  <script>
+    loadOrder();
+    function loadOrder()
+    {
+      $.ajax({
+        headers:{
+          Authorization:'Bearer '+localStorage.getItem("TOKEN")
+        },
+        type:'GET',
+        url:'http://localhost:8000/api/v1/bill/list-order?id=2',
+        success:function (data)
+        {
+         let str=``;
+         for(var i=0;i<data.length;i++)
+         {
+           console.log(data[i]);
+           str+=`<tr>
+            <td>
+             ${data[i].id}
+            </td>
+            <td>${data[i].date} </td>
+
+            <td> ${data[i].name}</td>
+            <td>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  name="${data[i].id}"
+                  id="${data[i].id}"
+                  class="checkbox__input"
+                  onclick="changeOrder(${data[i]})"
+                />
+                <label class="checkbox__lable" for="${data[i].id}">
+                  <div class="checkbox__circle"></div>
+                </label>
+              </div>
+            </td>
+            <td>
+               ${data[i].total}
+            </td>
+            <td>
+              <div class="status">
+                <p class="status__active">${data[i].user.username} </p>
+              </div>
+            </td>
+
+            <td>
+              <div class="action">
+                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-wrench"></i>
+                <i class="fa-solid fa-trash"></i>
+              </div>
+            </td>
+            <td>
+                <a style="text-decoration: none" href="#" onclick="detailOrder(${data[i].id})">details</a>
+            </td>
+          </tr>`
+         }
+         document.getElementById('tbody').innerHTML=str;
+          // console.log(data);
+        },
+      });
+    }
+    function changeOrder(data)
+    {
+      console.log(data)
+    }
+    function detailOrder(id)
+    {
+      $.ajax({
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("TOKEN")
+        },
+        type: 'GET',
+        url: 'http://localhost:8000/api/v1/billdetails?id='+id,
+        success: function (data) {
+          console.log(data);
+        }
+      });
+
+    }
+  </script>
+  </body>
+</html>

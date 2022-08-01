@@ -10,6 +10,9 @@ public class BillDetail {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    @OneToOne
+    @JoinColumn(name = "bill_id")
+    private Bill bill;
     private int number;
 
     public BillDetail(int id, Product product, int number) {

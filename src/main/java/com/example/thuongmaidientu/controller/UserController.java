@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -48,6 +49,13 @@ public class UserController {
     public ResponseEntity<Iterable<User>> showAllUser() {
         Iterable<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+    @GetMapping("/id")
+    public ResponseEntity<Optional<User>>findById(@RequestParam int id)
+    {
+        Optional<User> user=userService.findById(id);
+
+        return new ResponseEntity<>(user,HttpStatus.OK);
     }
     @PostMapping("/register")
     public ResponseEntity<User> createUser(@RequestBody User user, BindingResult bindingResult) {
