@@ -3,12 +3,13 @@ package com.example.thuongmaidientu.controller;
 import com.example.thuongmaidientu.model.User;
 import com.example.thuongmaidientu.respon.UserRespon;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Optional;
 
@@ -31,6 +32,10 @@ public class UserController {
     public ResponseEntity findByContent(String username){
         return new ResponseEntity(userRespon.findAllByUsernameContaining(username),HttpStatus.OK);
     }
+//    @GetMapping("/search-by-name")
+//    public ResponseEntity<Iterable<User>> findAllByNameContaining(@RequestParam String name,@PageableDefault(size = 3) Pageable pageable) {
+//        return new ResponseEntity<>(userRespon.findAllByUsernameContaining(pageable, name), HttpStatus.OK);
+//    }
     @PutMapping("/{id}")
     public ResponseEntity QuestionUpdate(@PathVariable Long id, @RequestBody User user){
         Optional<User> oldName = userRespon.findById(id);

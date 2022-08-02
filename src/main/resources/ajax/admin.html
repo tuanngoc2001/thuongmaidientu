@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <title>Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        body{
+            font-family: Verdana,sans-serif;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="admin">
+        <div class="admin__infor">
+            <h2 class="admin__title">Admin</h2>
+            <div class="admin__search">
+                <input placeholder="search ..." type="text" class="admin__search-input" id="search-name" oninput="search()">
+
+            </div>
+        </div>
+        <div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>username</th>
+                        <th>roles</th>
+                        <th>status</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody id="list">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        let tbody = document.getElementById('list');
+        let searchName = document.getElementById('search-name');
+        // let addForm = document.getElementById('addForm');
+
+        LoadData()
+        function LoadData(){
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8000/user",
+                success: function (user){
+                    ListData(user);
+                }
+            })
+        }
+
+        function ListData(user){
+            let str = "";
+            for (let i=0; i<user.length; i++){
+                str += `<tr>
+                        <td>${i+1}</td>
+                        <td>${user[i].username}</td>
+                        <td>
+                            ${user[i].role.name}
+                        </td>
+                        <td>
+                            <div class="status">
+                                <p class="status__active">Active</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="admin-table__action">
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-wrench"></i>
+                            <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </td>
+                        </tr>
+
+`
+                console.log(user);
+            }
+            tbody.innerHTML = str
+        }
+        function search(){
+            console.log(searchName.value);
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8000/user/search-by-name?username="+ searchName.value,
+                success: function (user){
+                    ListData(user);
+                }
+            })
+        }
+    </script>
+</body>
+</html>
