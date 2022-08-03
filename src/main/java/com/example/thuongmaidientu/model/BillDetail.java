@@ -15,9 +15,10 @@ public class BillDetail {
     private Bill bill;
     private int number;
 
-    public BillDetail(int id, Product product, int number) {
+    public BillDetail(int id, Product product, Bill bill, int number) {
         this.id = id;
         this.product = product;
+        this.bill = bill;
         this.number = number;
     }
 
@@ -46,5 +47,13 @@ public class BillDetail {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 }

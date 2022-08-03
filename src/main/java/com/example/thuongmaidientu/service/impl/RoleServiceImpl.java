@@ -4,6 +4,8 @@ import com.example.thuongmaidientu.model.Role;
 import com.example.thuongmaidientu.repository.RoleRepository;
 import com.example.thuongmaidientu.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,6 +32,12 @@ roleRepository.save(role);
     public Iterable<String> findNameRole() {
         return roleRepository.findNameRole();
     }
+
+    @Override
+    public Page<Role> findAllByNameContaining(Pageable pageable, String name) {
+        return roleRepository.findAllByNameContaining(pageable,name);
+    }
+
 
 
 }

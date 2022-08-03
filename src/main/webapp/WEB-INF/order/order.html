@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="order.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -16,6 +17,24 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
+    <style>
+      .table{
+        width: 80%;
+        margin: 0 auto;
+        display:flex;
+        flex-direction: column;
+        align-items: end;
+      }
+      .table thead th{
+        font-weight: 500;
+        border:1px solid #ccc;
+
+      }
+      .table tbody td{
+        text-align: center;
+        border:1px solid #ccc;
+      }
+    </style>
   </head>
   <body>
     <div class="table">
@@ -35,50 +54,97 @@
         <tbody id="tbody">
         </tbody>
       </table>
+      <nav aria-label="Page navigation example" style="margin: 0 auto">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#" onclick="page(-1)">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#" onclick="page(1)">1</a></li>
+          <li class="page-item"><a class="page-link" href="#" onclick="page(2)">2</a></li>
+          <li class="page-item"><a class="page-link" href="#" onclick="page(3)">3</a></li>
+          <li class="page-item"><a class="page-link" href="#" onclick="page(-2)">Next</a></li>
+        </ul>
+      </nav>
     </div>
+
   <script>
-    loadOrder();
-    function loadOrder()
+    loadOrder(0);
+    let size=0;
+    function page(key)
+    {
+      switch (key)
+      {
+        case -1:
+          size>0?loadOrder(size-1):loadOrder(0);
+          if(size>0)
+          {
+            loadOrder(size-1);
+            size-=1;
+          }
+          else
+          {
+            loadOrder(0);
+          }
+          break;
+        case 1:
+          size=0;
+          loadOrder(size);
+          break;
+        case 2:
+          size=1;
+          loadOrder(size);
+
+          break;
+        case 3:
+          size=2;
+          loadOrder(size);
+          break;
+        case -2:
+          size+=1;
+          loadOrder(size);
+          break;
+      }
+    }
+    //xác nhận đơn hàng
+    function loadOrder(page)
     {
       $.ajax({
         headers:{
           Authorization:'Bearer '+localStorage.getItem("TOKEN")
         },
         type:'GET',
-        url:'http://localhost:8000/api/v1/bill/list-order?id=2',
+        url:'http://localhost:8000/api/v1/bill/search-by-status?page='+page+'&id=2&status=1',
         success:function (data)
         {
          let str=``;
-         for(var i=0;i<data.length;i++)
+         for(var i=0;i<data.content.length;i++)
          {
-           console.log(data[i]);
+           // console.log(data.content[i].id)
            str+=`<tr>
             <td>
-             ${data[i].id}
+             ${data.content[i].id}
             </td>
-            <td>${data[i].date} </td>
+            <td>${data.content[i].date} </td>
 
-            <td> ${data[i].name}</td>
+            <td> ${data.content[i].name}</td>
             <td>
               <div class="checkbox">
                 <input
                   type="checkbox"
-                  name="${data[i].id}"
-                  id="${data[i].id}"
+                  name="${data.content[i].id}"
+                  id="${data.content[i].id}"
                   class="checkbox__input"
-                  onclick="changeOrder(${data[i]})"
+
                 />
-                <label class="checkbox__lable" for="${data[i].id}">
+                <label class="checkbox__lable" for="${data.content[i].id}">
                   <div class="checkbox__circle"></div>
                 </label>
               </div>
             </td>
             <td>
-               ${data[i].total}
+               ${data.content[i].total}
             </td>
             <td>
               <div class="status">
-                <p class="status__active">${data[i].user.username} </p>
+                <p class="status__active">${data.content[i].user.username} </p>
               </div>
             </td>
 
@@ -90,12 +156,12 @@
               </div>
             </td>
             <td>
-                <a style="text-decoration: none" href="#" onclick="detailOrder(${data[i].id})">details</a>
+                <a style="text-decoration: none" href="#" onclick="detailOrder(${data.content[i].id})">details</a>
             </td>
           </tr>`
          }
          document.getElementById('tbody').innerHTML=str;
-          // console.log(data);
+         // document.getElementById('1').checked=true;
         },
       });
     }
@@ -112,11 +178,90 @@
         type: 'GET',
         url: 'http://localhost:8000/api/v1/billdetails?id='+id,
         success: function (data) {
-          console.log(data);
+          console.log(data[0])
+          let str=`
+              <div class="w3-container">
+  <h2>Chi tiết hóa đơn</h2>
+
+  <div class="w3-row">
+    <a href="javascript:void(0)" onclick="openCity(event, 'information');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Thông tin đơn hàng</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openCity(event, 'totalmoney');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Tổng tiền đơn hàng</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openCity(event, 'introduction');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Gioi thieu chung</div>
+    </a>
+  </div>
+
+  <div id="information" class="w3-container city" style="display:none">
+    <p>Ngày tạo: <span style="font-weight: 100">${data[0].bill.date}</span></p>
+    <p>Số lượng: <span style="font-weight: 100">${data[0].bill.total}</span></p>
+    <p>Mã HD: <span style="font-weight: 100">${data[0].bill.name}</span></p>
+    <p>Số lượng: <span style="font-weight: 100">${data[0].bill.total}</span></p>
+    <p>Gía: <span style="font-weight: 100">${data[0].product.price}</span></p>
+    <p>Tên Sán Phẩm : <span style="font-weight: 100">${data[0].product.name}</span></p>
+    <p>Tên Khách Hàng : <span style="font-weight: 100">${data[0].bill.user.username}</span></p>
+
+  </div>
+
+  <div id="totalmoney" class="w3-container city" style="display:none">
+    <h2>Thanh toán:</h2>
+    <p>Tổng tiền: <span style="font-weight: 100">192.000.000</span></p>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên sản phẩm</th>
+        <th>Số lượng</th>
+        <th>Gía</th>
+        <th>Tên khách hàng</th>
+        <th>Tổng tiền</th>
+      </tr>
+      </thead>
+      <tbody id="tbody">
+      <tr>
+        <td>${data[0].id}</td>
+        <td>${data[0].product.name}</td>
+        <td>${data[0].number}</td>
+        <td>${data[0].product.price}</td>
+        <td>${data[0].bill.user.username}</td>
+        <td>${data[0].number*data[0].product.price}</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+  <div id="introduction" class="w3-container city" style="display:none">
+    <h2>Ngoc Server Shop</h2>
+    <p>Tuấn Ngọc - Văn Cao - Thường</p>
+  </div>
+</div>
+
+`
+          document.body.innerHTML=str;
         }
       });
 
     }
   </script>
+    <script>
+      function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.firstElementChild.className += " w3-border-red";
+      }
+    </script>
   </body>
 </html>

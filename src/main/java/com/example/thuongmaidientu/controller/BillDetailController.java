@@ -1,8 +1,11 @@
 package com.example.thuongmaidientu.controller;
 
+import com.example.thuongmaidientu.model.Bill;
 import com.example.thuongmaidientu.model.BillDetail;
 import com.example.thuongmaidientu.service.BillDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,12 +20,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BillDetailController {
     @Autowired
     private BillDetailService billDetailService;
-    @GetMapping
-    public ResponseEntity<Iterable<BillDetail>> showBillDetailById(@RequestParam int id)
+    @GetMapping("/search-by-billid")
+    public ResponseEntity<Iterable<BillDetail>> showBillDetailById(@RequestParam int id,@PageableDefault(size = 2) Pageable pageable)
     {
-        Iterable<BillDetail> billDetails=billDetailService.findByBillId(id);
+        Iterable<BillDetail> billDetails=billDetailService.findByBillId(pageable,id);
         if(billDetails==null)
             return new ResponseEntity<>(billDetails, HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(billDetails, HttpStatus.OK);
     }
+    @GetMapping("/user-order")
+    public ResponseEntity<Iterable<BillDetail>> showBillDetailByUserId(@RequestParam int id)
+    {
+        Iterable<BillDetail> billDetails=billDetailService.findAllByBill_User_Id(id);
+        if(billDetails==null)
+            return new ResponseEntity<>(billDetails, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(billDetails, HttpStatus.OK);
+    }
+
 }

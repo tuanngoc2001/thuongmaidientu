@@ -1,8 +1,12 @@
 package com.example.thuongmaidientu.service;
 
+import com.example.thuongmaidientu.model.Bill;
 import com.example.thuongmaidientu.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
 
 import java.util.Optional;
 
@@ -25,4 +29,5 @@ public interface UserService extends UserDetailsService {
     boolean isRegister(User user);
 
     boolean isCorrectConfirmPassword(User user);
+
 }

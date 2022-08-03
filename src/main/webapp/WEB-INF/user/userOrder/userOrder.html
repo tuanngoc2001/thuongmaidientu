@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="userOrder.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>date</th>
+            <th>RECEIPT</th>
+            <th>number</th>
+            <th>username</th>
+            <th>Pay</th>
+
+
+          </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </div>
+  <script>
+    loadOrder();
+    //xem danh sách đơn hàng đã mua
+    //status 2 là đã mua hàng
+    function loadOrder()
+    {
+      $.ajax({
+        headers:{
+          Authorization:'Bearer '+localStorage.getItem("TOKEN")
+        },
+        type:'GET',
+        url:'http://localhost:8000/api/v1/billdetails/user-order?id='+localStorage.getItem('USERID'),
+        success:function (data)
+        {
+         let str=``;
+
+         // for(var i=0;i<data.length;i++)
+         // {
+         //   str+=`<tr>
+         //    <td>
+         //     ${data[i].id}
+         //    </td>
+         //    <td>${data[i].bill.date} </td>
+         //
+         //    <td> ${data[i].bill.name}</td>
+         //
+         //    <td>
+         //       ${data[i].bill.total}
+         //    </td>
+         //    <td>
+         //      <div class="status">
+         //        <p class="status__active">${data[i].bill.user.username} </p>
+         //      </div>
+         //    </td>
+         //
+         //    <td>
+         //    <div class="status">
+         //        <p class="status__active">Credit </p>
+         //      </div>
+         //      </td>
+         //
+         //  </tr>`
+         //
+         //   document.getElementById('tbody').innerHTML=str;
+         //
+         // }
+          console.log(data)
+        },
+      });
+    }
+
+  </script>
+  </body>
+</html>
