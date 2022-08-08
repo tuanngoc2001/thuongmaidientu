@@ -29,13 +29,17 @@ public class UserController {
         return new ResponseEntity( HttpStatus.OK);
     }
     @GetMapping("/search-by-name")
-    public ResponseEntity findByContent(String username){
+    public ResponseEntity findByName(String username){
         return new ResponseEntity(userRespon.findAllByUsernameContaining(username),HttpStatus.OK);
     }
 //    @GetMapping("/search-by-name")
 //    public ResponseEntity<Iterable<User>> findAllByNameContaining(@RequestParam String name,@PageableDefault(size = 3) Pageable pageable) {
 //        return new ResponseEntity<>(userRespon.findAllByUsernameContaining(pageable, name), HttpStatus.OK);
 //    }
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable Long id){
+        return new ResponseEntity(userRespon.findById(id).get(), HttpStatus.OK);
+    }
     @PutMapping("/{id}")
     public ResponseEntity QuestionUpdate(@PathVariable Long id, @RequestBody User user){
         Optional<User> oldName = userRespon.findById(id);

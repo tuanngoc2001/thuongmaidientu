@@ -1,6 +1,7 @@
 package com.example.thuongmaidientu.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class User {
@@ -11,6 +12,9 @@ public class User {
     private String password;
     private String confirmPassword;
     private int status;
+    private String birthDay;
+
+
 
     public User() {
     }
@@ -25,12 +29,13 @@ public class User {
         this.role = role;
     }
 
-    public User(Long id, String username, String password, String confirmPassword, int status) {
+    public User(Long id, String username, String password, String confirmPassword, int status, String birthDay) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.status = status;
+        this.birthDay = birthDay;
     }
 
     public Long getId() {
@@ -71,5 +76,12 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+    public String getBirth() {
+        return birthDay;
+    }
+
+    public void setBirth(String birthDay) {
+        this.birthDay = birthDay;
     }
 }

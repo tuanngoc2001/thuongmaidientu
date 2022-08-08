@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
     <title>Admin</title>
     <link
       rel="stylesheet"
@@ -27,19 +26,16 @@
             <h2 class="admin__title">Admin</h2>
             <div class="admin__search">
                 <input placeholder="search ..." type="text" class="admin__search-input" id="search-name" oninput="search()">
-
+                <button class="admin__add" onclick="addBut()">Add</button>
             </div>
+
+
+
         </div>
         <div>
-            <table class="admin-table">
+            <table class="admin-table" >
                 <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>username</th>
-                        <th>roles</th>
-                        <th>status</th>
-                        <th>action</th>
-                    </tr>
+
                 </thead>
                 <tbody id="list">
 
@@ -47,11 +43,11 @@
             </table>
         </div>
     </div>
+
     <script>
         let tbody = document.getElementById('list');
         let searchName = document.getElementById('search-name');
-        // let addForm = document.getElementById('addForm');
-
+        let table = document.getElementById('table');
         LoadData()
         function LoadData(){
             $.ajax({
@@ -62,7 +58,31 @@
                 }
             })
         }
+        function findId(id){
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8000/user/"+ id,
+                success: function (user){
+                    detail(user);
 
+                }
+            })
+        }
+
+        function detail(user){
+            let one = "";
+            one =`<tr>
+            <td>Name: ${user.username}</td>
+            </tr>
+            <tr>
+            <td>Role: ${user.role.name}</td>
+            </tr>
+            <tr>
+            <td>Date: ${user.birth}</td>
+            </tr>
+            <button onclick="LoadData()">Back</button>`
+            tbody.innerHTML = one;
+        }
         function ListData(user){
             let str = "";
             for (let i=0; i<user.length; i++){
@@ -79,25 +99,89 @@
                         </td>
                         <td>
                             <div class="admin-table__action">
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-wrench"></i>
-                            <i class="fa-solid fa-trash"></i>
+                            <button onclick="findId(${user[i].id})">Detail</button>
+                            <button onclick="">Update</button>
+                            <button onclick="Delete(${user[i].id})">Delete</button>
                             </div>
                         </td>
                         </tr>
-
 `
-                console.log(user);
             }
             tbody.innerHTML = str
         }
         function search(){
-            console.log(searchName.value);
             $.ajax({
                 type: "GET",
                 url: "http://localhost:8000/user/search-by-name?username="+ searchName.value,
                 success: function (user){
                     ListData(user);
+                }
+            })
+        }
+        function addBut(){
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8000/user",
+                success: function (){
+                    let str = "";
+                    str += ` <div class="col-12">
+            <h3>Add</h3>
+            <div>
+                <form >
+                    <input placeholder="User name" type="text" name="username" id="username">
+                    <input placeholder="Password" type="password" name="password" id="password">
+                    <input placeholder="ConfirmPassword" type="password" name="confirmPassword" id="confirmPassword">
+                    <select id="roleId">
+                    <option value="1">Admin</option>
+                    <option value="2">Manager</option>
+                    <option value="3">Salesman</option>
+                    <option value="4">Customer</option>
+                </select>
+                </form>
+                 <button onclick="save()">save</button>
+            </div>
+        </div>`
+                    tbody.innerHTML = str
+                }
+            })
+        }
+        function save(){
+
+            let user = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                confirmPassword: document.getElementById('confirmPassword').value,
+                role: {
+                    id: document.getElementById('roleId').value,
+                },
+
+            }
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                type: 'POST',
+                url: 'http://localhost:8000/user',
+                data: JSON.stringify(user),
+                success: function (){
+                    LoadData();
+                },
+                error: function (error){
+                    console.log(error)
+                }
+            })
+        }
+        function Delete(id){
+            $.ajax({
+                type: "Delete",
+                url: "http://localhost:8000/user/"+ id,
+                success: function (){
+                    alert("success");
+                    LoadData();
+                },
+                error: function (){
+                    alert("error");
                 }
             })
         }

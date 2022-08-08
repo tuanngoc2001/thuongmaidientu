@@ -7,6 +7,8 @@ body{
   overflow:hidden;
   text-overflow: ellipsis;
 }
+
+
 .admin__infor {
   height: 5rem;
   display: flex;
@@ -16,10 +18,15 @@ body{
   display: inline-block;
   text-align: right;
   width: 50%;
+  margin-bottom: 35px;
   /*margin-bottom: 2rem;*/
 }
-.admin__search {
+.admin__add{
   margin: 2rem auto;
+}
+.admin__search {
+  margin-bottom: 20px;
+  margin-left: 145px;
   position: relative;
 
 }
@@ -37,6 +44,11 @@ body{
   right: 0;
   transform: translate(100%, 30%);
   z-index: 2;
+}
+.admin__add{
+  margin-bottom: 20px;
+  margin-left: 25px;
+  position: relative;
 }
 .admin-table {
   width: 80%;
