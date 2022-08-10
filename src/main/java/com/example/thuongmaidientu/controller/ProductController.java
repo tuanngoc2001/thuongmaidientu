@@ -3,10 +3,13 @@ package com.example.thuongmaidientu.controller;
 import com.example.thuongmaidientu.model.Product;
 import com.example.thuongmaidientu.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Optional;
 
@@ -30,6 +33,10 @@ public class ProductController {
     {
         return new ResponseEntity(productRepository.findAllByNameContaining(name), HttpStatus.OK);
     }
+@GetMapping("/phantrang-name")
+public ResponseEntity<Iterable<Product>> findAllByNameContaining(@RequestParam String name,@PageableDefault(size = 3) Pageable pageable) {
+    return new ResponseEntity<>(productRepository.findAllByNameContaining(pageable, name), HttpStatus.OK);
+}
 
     @PostMapping
     public ResponseEntity save(@RequestBody Product product) {

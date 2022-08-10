@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>MultiShop - Online Shop Website Template</title>
@@ -31,11 +29,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="./style.css" rel="stylesheet">
-
 </head>
-
 <body>
-
 <!-- Topbar Start -->
 <div class="container-fluid">
     <div class="row bg-secondary py-1 px-xl-5">
@@ -95,12 +90,11 @@
         <div class="col-lg-4 col-6 text-left">
             <form action="">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products" id="search-name">
+                    <input type="text" class="form-control" placeholder="Search for products">
                     <div class="input-group-append">
-                        <!--                            <span class="input-group-text bg-transparent text-primary">-->
-                        <!--                                <i class="fa fa-search"></i>-->
-                        <!--                            </span>-->
-                        <button type="button" class="btn btn-primary" onclick="search()">Search </button>
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
                     </div>
                 </div>
             </form>
@@ -113,8 +107,9 @@
 </div>
 <!-- Topbar End -->
 
+
 <!-- Navbar Start -->
-<div class="container-fluid bg-dark mb-30" >
+<div class="container-fluid bg-dark mb-30">
     <div class="row px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
             <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
@@ -153,10 +148,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav ">
-                        <a href="#" class="nav-item nav-link active">Home</a>
-                        <a href="#" class="nav-item nav-link">Shop</a>
-                        <a href="#" class="nav-item nav-link" >Shop Detail</a>
+                    <div class="navbar-nav mr-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="shop.html" class="nav-item nav-link">Shop</a>
+                        <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
@@ -165,7 +160,6 @@
                             </div>
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        <a href="#" class="nav-item nav-link" onclick="showAddForm()">Add Product</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0">
@@ -452,7 +446,7 @@
 <!-- Products Start -->
 <div class="container-fluid pt-5 pb-3">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
-    <div class="row px-xl-5">
+    <div class="row px-xl-5" >
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
             <div class="product-item bg-light mb-4">
                 <div class="product-img position-relative overflow-hidden">
@@ -822,74 +816,9 @@
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm sản phẩm</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" >
-                <form id="addForm">
-                    <label>Price: </label>
-                    <input type="text" name="price" class="form-control">
-                    <label>Name: </label>
-                    <input type="text" name="name" class="form-control">
-                    <label>Image: </label>
-                    <input type="text" name="image" class="form-control">
-                    <label>Number: </label>
-                    <input type="text" name="number" class="form-control">
-                    <label>Sale: </label>
-                    <input type="text" name="sale" class="form-control">
-                </form>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="save()">Save </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--modal2-->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Edit Product</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editForm">
-                    <input type="hidden" id="id">
-                    <label>Price: </label>
-                    <input type="text" name="price" class="form-control" id="price">
-                    <label>Name: </label>
-                    <input type="text" name="name" class="form-control" id="name">
-                    <label>Image: </label>
-                    <input type="text" name="image" class="form-control" id="image">
-                    <label>Number: </label>
-                    <input type="text" name="number" class="form-control" id="number">
-                    <label>Sale: </label>
-                    <input type="text" name="sale" class="form-control" id="sale">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="update()">Edit </button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <script>
-    let addForm = document.getElementById('addForm');
-    let searchName = document.getElementById('search-name');
-    let editForm = document.getElementById('editForm');
     loadData()
     function loadData() {
         $.ajax({
@@ -928,150 +857,12 @@
                         <small class="fa fa-star text-primary mr-1"></small>
                         <small>(99)</small>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="showProductDelete(${data[i].id})">Delete </button>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">Thêm giỏ hàng </button>
                 </div>
             </div>
         </div>`
         }
         document.getElementById('main2').innerHTML = str;
-    }
-    function add() {
-        document.body.innerHTML = `<label>Price: </label>
-                               <input type="text" id="price"<br>
-                               <label>Name: </label>
-                               <input type="text" id="name">
-                               <label>Image: </label>
-                               <input type="text" id="image">
-                               <label>Number: </label>
-                               <input type="text" id="number">
-                               <label>Sale: </label>
-                               <input type="text" id="sale">
-                    <button onClick="addProduct()" class="btn btn-primary">Tạo mới</button>`}
-    function addProduct() {
-        let price = document.getElementById('price').value;
-        let name = document.getElementById('name').value;
-        let image = document.getElementById('image').value;
-        let number = document.getElementById('number').value;
-        let sale = document.getElementById('sale').value;
-        let obj = {
-            price: price,
-            name: name,
-            image: image,
-            number: number,
-            sale: sale
-        }
-        $.ajax({
-            headers:{
-                'Accept' : 'application/json',
-                'Content-Type':'application/json',
-            },
-            type:'POST',
-            url:"http://localhost:8000/products",
-            data: JSON.stringify(obj),
-            success: function ()
-            {
-                // loadData()
-            },
-            error: function (error){
-                console.log(error)
-            }
-
-        })
-    }
-    function showAddForm() {
-        $('#exampleModal').modal('show');
-    }
-    function save() {
-        let formData = new FormData(addForm);
-        let obj = {
-            price: formData.get('price'),
-            name: formData.get('name'),
-            image: formData.get('image'),
-            number: formData.get('number'),
-            sale: formData.get('sale')
-        }
-        $.ajax({
-            headers:{
-                'Accept' : 'application/json',
-                'Content-Type':'application/json',
-            },
-            type:'POST',
-            url: "http://localhost:8000/products",
-            data: JSON.stringify(obj),
-            success: function ()
-            {
-                loadData();
-                $('#exampleModal').modal('hide');
-            },
-            error: function (error){
-                console.log(error)
-            }
-
-        })
-    }
-    function search() {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8000/products/name?name="+searchName.value,
-            success: function (data) {
-                tach(data);
-            }
-        })
-    }
-    function showEditForm(id) {
-        $("#exampleModal1").modal("show");
-        let editFormData =  new FormData(editForm);
-        $.ajax({
-            type: "GET",
-            url: " http://localhost:8000/products/"+id,
-            success: function (data) {
-                console.log(data)
-                document.getElementById('id').value = data.id;
-                document.getElementById('price').value = data.price;
-                document.getElementById('name').value = data.name;
-                document.getElementById('image').value = data.image;
-                document.getElementById('number').value = data.number;
-                document.getElementById('sale').value = data.sale;
-            }
-        })
-    }
-    function update() {
-        let formData = new FormData(editForm);
-        let id= document.getElementById('id').value;
-        let obj = {
-            price: formData.get('price'),
-            name: formData.get('name'),
-            image: formData.get('image'),
-            number: formData.get('number'),
-            sale: formData.get('sale')
-        }
-        $.ajax({
-            headers:{
-                'Accept' : 'application/json',
-                'Content-Type':'application/json',
-            },
-            type:'PUT',
-            url: "http://localhost:8000/products/"+id,
-            data: JSON.stringify(obj),
-            success: function ()
-            {
-                loadData();
-                $('#exampleModal1').modal('hide');
-            },
-            error: function (error){
-                console.log(error)
-            }
-
-        })
-    }
-    function showProductDelete(id) {
-        $.ajax({
-            type: 'DELETE',
-            url: "http://localhost:8000/products/"+id,
-            success: function (data) {
-                loadData();
-            }
-        })
     }
 </script>
 </body>
