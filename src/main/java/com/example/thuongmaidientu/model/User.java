@@ -1,41 +1,46 @@
 package com.example.thuongmaidientu.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-public class User {
+@Table(name = "userTable")
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String confirmPassword;
-    private int status;
-    private String birthDay;
+    private boolean enabled = true;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles;
 
-
-    public User() {
-    }
-    @ManyToOne
-    private Role role;
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public User(Long id, String username, String password, String confirmPassword, int status, String birthDay) {
-        this.id = id;
+    public User(String username, String password, String confirmPassword, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.status = status;
-        this.birthDay = birthDay;
+        this.roles = roles;
+    }
+
+    public User() {
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Long getId() {
@@ -70,18 +75,20 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
-    public int getStatus() {
-        return status;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-    public String getBirth() {
-        return birthDay;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public void setBirth(String birthDay) {
-        this.birthDay = birthDay;
+    public boolean isEnabled() {
+        return enabled;
     }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
 }
