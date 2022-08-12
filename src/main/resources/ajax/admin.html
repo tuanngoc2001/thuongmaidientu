@@ -100,7 +100,7 @@
                         <td>
                             <div class="admin-table__action">
                             <button onclick="findId(${user[i].id})">Detail</button>
-                            <button onclick="">Update</button>
+                            <button onclick="updateId(${user[i].id})">Update</button>
                             <button onclick="Delete(${user[i].id})">Delete</button>
                             </div>
                         </td>
@@ -139,6 +139,7 @@
                 </select>
                 </form>
                  <button onclick="save()">save</button>
+                 <button onclick="LoadData()">cancel</button>
             </div>
         </div>`
                     tbody.innerHTML = str
@@ -185,6 +186,42 @@
                 }
             })
         }
+        // function updateId(id){
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "http://localhost:8000/user/"+ id,
+        //         success: function (user){
+        //
+        //
+        //         }
+        //     })
+        // }
+        // function Update(){
+        //     let user = {
+        //         username: document.getElementById('username').value,
+        //         password: document.getElementById('password').value,
+        //         confirmPassword: document.getElementById('confirmPassword').value,
+        //         role: {
+        //             id: document.getElementById('roleId').value,
+        //         },
+        //
+        //     }
+        //     $.ajax({
+        //         headers: {
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json',
+        //         },
+        //         type: 'PUT',
+        //         url: 'http://localhost:8000/user',
+        //         data: JSON.stringify(user),
+        //         success: function (){
+        //             LoadData();
+        //         },
+        //         error: function (error){
+        //             console.log(error)
+        //         }
+        //     })
+        // }
     </script>
 </body>
 </html>
