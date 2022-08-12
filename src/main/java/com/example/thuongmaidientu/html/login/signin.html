@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./signin.css" />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <title>Login</title>
+    <link rel="stylesheet" href="../admin/admin.css">
+    <style>
+        a {
+            /*text-decoration: none;*/
+
+            font-size: 2rem;
+            margin-left: 9rem;
+            font-weight: bold;
+            background: -webkit-linear-gradient(#E55D87 0%, #5FC3E4 51%, #E55D87 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="signin" id="signin">
+    <div class="signin__content">
+        <h1 class="signin__heading">Sign in</h1>
+        <h4 class="signin__caption">
+            <hr
+                    style="
+              display: inline-block;
+              transform: translateY(200%);
+              margin-right: 1rem;
+              border-radius: 2px;
+            "
+                    width="20%"
+                    size="2px"
+                    color="red"
+            />
+            Sign up with
+        </h4>
+        <div class="signin-social">
+            <div class="signin-social__item">
+                <i class="fa-brands fa-google sigin-social__icon"></i>
+                <span class="signin-social__text">Sign in with Google</span>
+            </div>
+            <div class="signin-social__item">
+                <i class="fa-brands fa-facebook sigin-social__icon"></i>
+                <span class="signin-social__text">Sign in with Facebook</span>
+            </div>
+        </div>
+        <form class="signin-form">
+            <div class="signin-form__group">
+                <input
+                        type="text"
+                        class="signin-form__input"
+                        id="user"
+                        placeholder="username"
+                />
+                <input
+                        type="text"
+                        class="signin-form__input"
+                        id="pass"
+                        placeholder="password"
+                />
+                <div class="checkbox">
+                    <input
+                            type="checkbox"
+                            class="checkbox__input"
+                            id="checkbox__input"
+                    />
+                    <label for="checkbox__input" class="checkbox__label" style="font-size: 2rem">Save Password</label><br />
+                </div>
+            </div>
+        </form>
+        <input type="submit" class="signin__submit" onclick="checklogin()" value="Sign in">
+        <a href="#" onclick="UIRegister()">Register</a>
+        <div class="checkbox2">
+            <input type="checkbox" class="checkbox2__input" id="checkbox2__input">
+            <label for="checkbox2__input" class="checkbox2__lable" onclick="myFunction()">
+                <div class="checkbox2__spin"></div>
+            </label>
+        </div>
+    </div>
+    <div class="signin__image">
+        <img src="image/phihanhgia.png" alt="" />
+    </div>
+</div>
+<script>
+    function UIRegister()
+    {
+        let str=`<div class="signin" id="signin">
+      <div class="signin__content">
+        <h1 class="signin__heading">Sign in</h1>
+        <h4 class="signin__caption">
+          <hr
+            style="
+              display: inline-block;
+              transform: translateY(200%);
+              margin-right: 1rem;
+              border-radius: 2px;
+            "
+            width="20%"
+            size="2px"
+            color="red"
+          />
+          Sign up with
+        </h4>
+        <div class="signin-social">
+          <div class="signin-social__item">
+            <i class="fa-brands fa-google sigin-social__icon"></i>
+            <span class="signin-social__text">Sign in with Google</span>
+          </div>
+          <div class="signin-social__item">
+            <i class="fa-brands fa-facebook sigin-social__icon"></i>
+            <span class="signin-social__text">Sign in with Facebook</span>
+          </div>
+        </div>
+        <form class="signin-form">
+          <div class="signin-form__group">
+            <input
+              type="text"
+              class="signin-form__input"
+              id="user"
+              placeholder="username"
+            />
+            <input
+              type="text"
+              class="signin-form__input"
+              id="pass"
+              placeholder="password"
+            />
+            <input
+                    type="text"
+                    class="signin-form__input"
+                    id="re-pass"
+                    placeholder="re-password"
+            />
+            <div class="checkbox">
+              <input
+                type="checkbox"
+                class="checkbox__input"
+                id="checkbox__input"
+              />
+              <label for="checkbox__input" class="checkbox__label" style="font-size: 2rem">Save Password</label><br />
+            </div>
+          </div>
+        </form>
+        <input type="submit" class="signin__submit" onclick="checkRegister()" value="Register">
+        <a href="#" onclick="UILogin()">Login</a>
+        <div class="checkbox2">
+            <input type="checkbox" class="checkbox2__input" id="checkbox2__input">
+            <label for="checkbox2__input" class="checkbox2__lable" onclick="myFunction()">
+              <div class="checkbox2__spin"></div>
+            </label>
+          </div>
+      </div>
+      <div class="signin__image">
+        <img src="image/phihanhgia.png" alt="" />
+      </div>
+    </div>`
+        document.body.innerHTML=str;
+
+
+    }
+    function UILogin()
+    {
+        document.body.innerHTML=`<div class="signin" id="signin">
+      <div class="signin__content">
+        <h1 class="signin__heading">Sign in</h1>
+        <h4 class="signin__caption">
+          <hr
+            style="
+              display: inline-block;
+              transform: translateY(200%);
+              margin-right: 1rem;
+              border-radius: 2px;
+            "
+            width="20%"
+            size="2px"
+            color="red"
+          />
+          Sign up with
+        </h4>
+        <div class="signin-social">
+          <div class="signin-social__item">
+            <i class="fa-brands fa-google sigin-social__icon"></i>
+            <span class="signin-social__text">Sign in with Google</span>
+          </div>
+          <div class="signin-social__item">
+            <i class="fa-brands fa-facebook sigin-social__icon"></i>
+            <span class="signin-social__text">Sign in with Facebook</span>
+          </div>
+        </div>
+        <form class="signin-form">
+          <div class="signin-form__group">
+            <input
+              type="text"
+              class="signin-form__input"
+              id="user"
+              placeholder="username"
+            />
+            <input
+              type="text"
+              class="signin-form__input"
+              id="pass"
+              placeholder="password"
+            />
+            <div class="checkbox">
+              <input
+                type="checkbox"
+                class="checkbox__input"
+                id="checkbox__input"
+              />
+              <label for="checkbox__input" class="checkbox__label" style="font-size: 2rem">Save Password</label><br />
+            </div>
+          </div>
+        </form>
+        <input type="submit" class="signin__submit" onclick="checklogin()" value="Sign in">
+        <a href="#" onclick="UIRegister()">Register</a>
+        <div class="checkbox2">
+            <input type="checkbox" class="checkbox2__input" id="checkbox2__input">
+            <label for="checkbox2__input" class="checkbox2__lable" onclick="myFunction()">
+              <div class="checkbox2__spin"></div>
+            </label>
+          </div>
+      </div>
+      <div class="signin__image">
+        <img src="image/phihanhgia.png" alt="" />
+      </div>
+    </div>`
+    }
+    function checkRegister(){
+        let user=document.getElementById('user').value;
+        let pass=document.getElementById('pass').value;
+        let repPass=document.getElementById('re-pass').value;
+        let save=document.getElementsByClassName('checkbox__input');
+        console.log(pass)
+        console.log(repPass)
+        if(repPass==pass)
+        {
+            let obj={
+                username:user,
+                password:pass,
+                confirmPassword:repPass
+            }
+            Register(obj);
+        }
+        else
+            console.log("mật khẩu khác nhau");
+
+    }
+    function Register(obj)
+    {
+        $.ajax({
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json',
+            },
+            type:'POST',
+            url:'http://localhost:8000/register',
+            data:JSON.stringify(obj),
+            success:function (data)
+            {
+                console.log(data);
+                // loadUser();
+            },
+
+        });
+    }
+    function myFunction() {
+        var element = document.getElementById('signin');
+        element.classList.toggle("dark-mode");
+    }
+    function checklogin()
+    {
+        let user=document.getElementById('user').value;
+        let pass=document.getElementById('pass').value;
+        let save=document.getElementsByClassName('checkbox__input');
+
+
+        let obj={
+            username:user,
+            password:pass
+        }
+        $.ajax({
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json',
+            },
+            type:'POST',
+            url:'http://localhost:8000/login',
+            data:JSON.stringify(obj),
+            success:function (data)
+            {
+
+                localStorage.setItem("TOKEN",data.accessToken);
+                // if(save[0].checked==true)
+                // {
+                localStorage.setItem("USERID",data.id);
+                // }
+                console.log(data.accessToken);
+                checkUi(data);
+
+            },
+
+        });
+    }
+    //nêu user thì vào template chính còn k thì vào giao diện admin
+
+    function checkUi(data)
+    {
+
+        if(data.roles[0].authority=="ROLE_ADMIN")
+        {
+            document.body.innerHTML=`<div class="admin">
+        <div class="admin__infor">
+            <h2 class="admin__title">Admin</h2>
+            <div class="admin__search">
+                <input placeholder="search ..." type="text" class="admin__search-input">
+                <i class="fa-solid fa-magnifying-glass admin__search-icon" ></i>
+            </div>
+        </div>
+        <div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>username</th>
+                        <th>roles</th>
+                        <th>status</th>
+                        <th>action</th>
+                        <th>details</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr>
+                        <td>${data.id}</td>
+                        <td>${data.username}</td>
+                        <td>
+                            <select id="select">
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="status" id="status">
+                             <p class="status__active">Active</p>
+<!--                                <p class="status__unable">Unable</p>-->
+                            </div>
+                        </td>
+                        <td>
+                            <div class="admin-table__action">
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-wrench"></i>
+                            <a style="margin: 0" href="" onclick="deleteUser(${data.id})"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </td>
+<!--                        <td><a href="#" onclick="detailsBill(${data.id})">details</a></td>-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>`
+
+
+
+
+            // document.getElementById('tbody').innerHTML=str;
+            $.ajax({
+                headers:{
+                    Authorization:'Bearer '+localStorage.getItem("TOKEN")
+                },
+                type:'GET',
+                url:'http://localhost:8000/api/v1/roles/name',
+                success:function (data)
+                {
+                    let tmp=``;
+                    for(var i=0;i<data.length;i++)
+                    {
+                        tmp+=`<option value="${data[i]}">${data[i]}</option>`
+                    }
+                    document.getElementById('select').innerHTML=tmp;
+                },
+
+            });
+
+        }
+    }
+    function detailsBill(id)
+    {
+        console.log(id);
+    }
+    function deleteUser(id)
+    {
+
+    }
+</script>
+</body>
+</html>

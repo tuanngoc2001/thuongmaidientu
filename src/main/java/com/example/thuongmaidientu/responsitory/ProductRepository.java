@@ -1,4 +1,4 @@
-package com.example.thuongmaidientu.repository;
+package com.example.thuongmaidientu.responsitory;
 
 import com.example.thuongmaidientu.model.Product;
 import org.springframework.data.domain.Page;

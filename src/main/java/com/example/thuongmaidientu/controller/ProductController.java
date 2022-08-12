@@ -1,7 +1,7 @@
 package com.example.thuongmaidientu.controller;
 
 import com.example.thuongmaidientu.model.Product;
-import com.example.thuongmaidientu.repository.ProductRepository;
+import com.example.thuongmaidientu.responsitory.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

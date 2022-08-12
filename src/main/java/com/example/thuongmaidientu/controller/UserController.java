@@ -1,10 +1,8 @@
 package com.example.thuongmaidientu.controller;
 
 import com.example.thuongmaidientu.model.User;
-import com.example.thuongmaidientu.respon.UserRespon;
+import com.example.thuongmaidientu.responsitory.UserRespon;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

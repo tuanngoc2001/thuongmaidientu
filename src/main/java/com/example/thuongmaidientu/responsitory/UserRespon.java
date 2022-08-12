@@ -1,4 +1,4 @@
-package com.example.thuongmaidientu.respon;
+package com.example.thuongmaidientu.responsitory;
 
 import com.example.thuongmaidientu.model.User;
 import org.springframework.data.domain.Page;
