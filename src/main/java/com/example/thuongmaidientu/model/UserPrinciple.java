@@ -1,3 +1,5 @@
+package com.example.thuongmaidientu.model;
+
 import com.example.thuongmaidientu.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
